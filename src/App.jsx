@@ -51,7 +51,7 @@ const PROJECTS = [
   {
     id: 5,
     name: "Dashboard Absen",
-    tag: "Monitoring - Belum diimplementasikan",
+    tag: "Monitoring",
     period: "Mar – Apr 2026",
     desc: "Dashboard monitoring absensi dengan interface yang clean dan mudah dipahami.",
     contribution: "Monitoring Dashboard · Attendance Interface · Dashboard Usability",
@@ -428,7 +428,7 @@ function About() {
                 <img
                   src={maylaPic}
                   alt="Mayla"
-                  className="w-100 h-150 object-cover"
+                  className="w-full h-full object-cover"
                   onError={(e) => {
                     e.target.style.display = "none";
                     e.target.nextSibling.style.display = "flex";
