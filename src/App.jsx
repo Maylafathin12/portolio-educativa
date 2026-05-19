@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import maylaPic from "./assets/mayla.png";
+import kelasrisetPic from "./assets/kelasriset.png";
+import globalPic from "./assets/global.png";
+import eduresearchPic from "./assets/eduresearch.png";
+import internalitPic from "./assets/internalit.png";
+import dashboardPic from "./assets/dashboard.png";
+import gamanagementPic from "./assets/gamanagement.png";
 
 // data
 const PROJECTS = [
@@ -14,6 +20,8 @@ const PROJECTS = [
     outcome: "Visual consistency meningkat, navigasi lebih intuitif, dan interface yang sepenuhnya responsif.",
     stack: ["HTML", "CSS", "Figma"],
     accent: "#0071E3",
+    image: kelasrisetPic,
+    link: "https://kelasriset.id",
   },
   {
     id: 2,
@@ -25,6 +33,8 @@ const PROJECTS = [
     outcome: "UI modern dan professional dengan visual clarity yang meningkat signifikan.",
     stack: ["React JS", "TailwindCSS", "Three.js", "GSAP"],
     accent: "#5E5CE6",
+    image: globalPic,
+    link: "https://global.educativa.id/",
   },
   {
     id: 3,
@@ -36,6 +46,8 @@ const PROJECTS = [
     outcome: "Arsitektur frontend scalable dengan pola interaksi AI yang intuitif.",
     stack: ["React JS", "TailwindCSS", "Framer Motion"],
     accent: "#30B0C7",
+    image: eduresearchPic,
+    link: "https://dev-research.educativa.id/",
   },
   {
     id: 4,
@@ -47,6 +59,8 @@ const PROJECTS = [
     outcome: "Hierarki data yang jelas dan experience dashboard yang modern.",
     stack: ["Figma"],
     accent: "#34C759",
+    image: internalitPic,
+    link: "https://www.figma.com/proto/3nfpUVrEN4BfwRpuTm4WoD/Wireframe?page-id=0%3A1&node-id=2137-508&viewport=-4267%2C320%2C0.14&t=CYfmbAfqvjQN3prx-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2137%3A508"
   },
   {
     id: 5,
@@ -58,6 +72,7 @@ const PROJECTS = [
     outcome: "Usability meningkat dengan experience monitoring yang clean dan intuitif.",
     stack: ["HTML", "CSS", "JS"],
     accent: "#FF9F0A",
+    image: dashboardPic,
   },
   {
     id: 6,
@@ -69,6 +84,7 @@ const PROJECTS = [
     outcome: "Sistem UI terstruktur dengan akses data terintegrasi dan alur operasional transparan.",
     stack: ["HTML", "CSS", "JS"],
     accent: "#FF375F",
+    image: gamanagementPic,
   },
 ];
 
@@ -88,7 +104,7 @@ const STATS = [
   { value: "6+", label: "Internal Project", sub: "Lintas departemen" },
   { value: "2×", label: "Best FE/UI UX Mentor", sub: "Diakui oleh Intern FE & Intern UI/UX" },
   { value: "Top 5", label: "EduBisa Nominee", sub: "Dipilih Manajemen" },
-  { value: "Achieve", label: "Most Growth Person & Intern Maganghub Terbaik", sub: "Dipilih oleh EduTeam & Divisi IT" },
+  { value: "Most", label: "Growth Person", sub: "Dipilih melalui voting oleh EduTeam" },
 ];
 
 const ACHIEVEMENTS = [
@@ -139,7 +155,6 @@ const timelineData = [
       "Melakukan revamp pada beberapa halaman utama seperti Landing Page dan Pricing Page.",
       "Meningkatkan visual consistency dan user experience secara keseluruhan.",
       "Membangun interface responsif modern yang dioptimalkan untuk semua ukuran layar.",
-      "Memperkuat struktur visual dengan design language yang lebih unified.",
     ],
   },
   {
@@ -637,33 +652,47 @@ function Experience() {
 
 function ProjectCard({ project, index }) {
   const [hovered, setHovered] = useState(false);
-  return (
+  const cardContent = (
     <motion.div
       initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}
       variants={fadeUp} custom={index * 0.08}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      className="group bg-white border border-black/[0.06] rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-black/[0.06] transition-all duration-500"
+      onHoverStart={() => project.link && setHovered(true)}
+      onHoverEnd={() => project.link && setHovered(false)}
+      className={`group bg-white border border-black/[0.06] rounded-3xl overflow-hidden ${
+        project.link 
+          ? "hover:shadow-xl hover:shadow-black/[0.06] cursor-pointer" 
+          : "cursor-default"
+      } transition-all duration-500 h-full`}
     >
       {/* Mockup top */}
       <div className="relative h-48 bg-[#F5F5F7] overflow-hidden">
-        <div className="absolute inset-4 bg-white rounded-xl border border-black/[0.06] overflow-hidden shadow-sm">
-          <div className="flex items-center gap-1.5 px-3 py-2 border-b border-black/[0.05]">
+        <div className="absolute inset-4 bg-white rounded-xl border border-black/[0.06] overflow-hidden shadow-sm flex flex-col">
+          <div className="flex items-center gap-1.5 px-3 py-2 border-b border-black/[0.05] bg-white flex-shrink-0">
             <div className="w-2 h-2 rounded-full bg-[#FF5F57]" />
             <div className="w-2 h-2 rounded-full bg-[#FEBC2E]" />
             <div className="w-2 h-2 rounded-full bg-[#28C840]" />
             <div className="flex-1 mx-2 bg-[#F5F5F7] rounded h-2.5 border border-black/[0.04]" />
           </div>
-          <div className="p-3 space-y-2">
-            <div className="h-3 rounded-full w-2/3" style={{ background: `${project.accent}18` }} />
-            <div className="h-2.5 rounded-full w-full bg-black/[0.04]" />
-            <div className="h-2.5 rounded-full w-3/4 bg-black/[0.04]" />
-            <div className="grid grid-cols-3 gap-2 mt-2">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="h-10 rounded-lg border border-black/[0.05]"
-                  style={{ background: `${project.accent}08` }} />
-              ))}
-            </div>
+          <div className="flex-1 overflow-hidden relative bg-white flex items-center justify-center">
+            {project.image ? (
+              <img
+                src={project.image}
+                alt={project.name}
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div className="p-3 space-y-2 w-full">
+                <div className="h-3 rounded-full w-2/3" style={{ background: `${project.accent}18` }} />
+                <div className="h-2.5 rounded-full w-full bg-black/[0.04]" />
+                <div className="h-2.5 rounded-full w-3/4 bg-black/[0.04]" />
+                <div className="grid grid-cols-3 gap-2 mt-2">
+                  {[...Array(3)].map((_, i) => (
+                    <div key={i} className="h-10 rounded-lg border border-black/[0.05]"
+                      style={{ background: `${project.accent}08` }} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -681,14 +710,16 @@ function ProjectCard({ project, index }) {
         </div>
 
         {/* Arrow on hover */}
-        <motion.div
-          animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : -4 }}
-          transition={{ duration: 0.2 }}
-          className="absolute top-4 right-4 w-7 h-7 rounded-full bg-white border border-black/[0.08] flex items-center justify-center text-xs shadow-sm"
-          style={{ color: project.accent }}
-        >
-          →
-        </motion.div>
+        {project.link && (
+          <motion.div
+            animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : -4 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-4 right-4 w-7 h-7 rounded-full bg-white border border-black/[0.08] flex items-center justify-center text-xs shadow-sm"
+            style={{ color: project.accent }}
+          >
+            →
+          </motion.div>
+        )}
       </div>
 
       {/* Info */}
@@ -716,6 +747,16 @@ function ProjectCard({ project, index }) {
       </div>
     </motion.div>
   );
+
+  if (project.link) {
+    return (
+      <a href={project.link} target="_blank" rel="noopener noreferrer" className="block h-full transition-transform duration-300 hover:-translate-y-1">
+        {cardContent}
+      </a>
+    );
+  }
+
+  return cardContent;
 }
 
 function Projects() {
